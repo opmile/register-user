@@ -57,8 +57,6 @@ API REST para gerenciamento de usuários, construída com Spring Boot e PostgreS
    
 2. Configure o banco PostgreSQL no `application.properties`
 
-3. Execute o projeto:
-
-`mvn spring-boot:run`
+3. Execute o projeto: `mvn spring-boot:run`
 
 Os endpoints estarão disponíveis em `http://localhost:8080`.
