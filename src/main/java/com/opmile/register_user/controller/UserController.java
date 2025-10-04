@@ -40,6 +40,16 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(new UserDTO(user));
     }
 
+    @PostMapping("/fetch-external")
+    public ResponseEntity<List<UserDTO>> registerFetchExternal(@RequestParam(required = true) int quantity) {
+        List<User> users = userService.registerFetch(quantity);
+        return ResponseEntity.status(HttpStatus.CREATED).body(
+                users.stream()
+                        .map(UserDTO::new)
+                        .toList()
+        );
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<UserDTO> updateUser(@PathVariable Long id,
                                               @RequestBody UserUpdateDTO dto) {
@@ -50,6 +60,12 @@ public class UserController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> deleteAll() {
+        userService.deleteAll();
         return ResponseEntity.noContent().build();
     }
 }

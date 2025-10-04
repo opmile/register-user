@@ -24,6 +24,14 @@ public class GlobalExceptionHandler {
         ));
     }
 
+    @ExceptionHandler(FetchErrorException.class)
+    public ResponseEntity<ResponseError> handleFetchError(FetchErrorException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(new ResponseError(
+                HttpStatus.BAD_REQUEST.value(),
+                ex.getMessage()
+        ));
+    }
+
     @ExceptionHandler(Exception.class) // fallback
     public ResponseEntity<ResponseError> handleGeneric(Exception ex) {
         return ResponseEntity
